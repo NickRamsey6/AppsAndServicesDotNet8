@@ -1,12 +1,71 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\nramsey-az\\Desktop\\AppsAndServicesDotNet8\\Chapter02\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\nramsey-az\\Desktop\\AppsAndServicesDotNet8\\Chapter02\\Chapter02\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A90AAB3D-61C3-473C-A829-CB67E25615B7}|Northwind.Console.SqlClient\\Northwind.Console.SqlClient.csproj|c:\\users\\nramsey-az\\desktop\\appsandservicesdotnet8\\chapter02\\chapter02\\northwind.console.sqlclient\\program.helpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A90AAB3D-61C3-473C-A829-CB67E25615B7}|Northwind.Console.SqlClient\\Northwind.Console.SqlClient.csproj|solutionrelative:northwind.console.sqlclient\\program.helpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A90AAB3D-61C3-473C-A829-CB67E25615B7}|Northwind.Console.SqlClient\\Northwind.Console.SqlClient.csproj|c:\\users\\nramsey-az\\desktop\\appsandservicesdotnet8\\chapter02\\chapter02\\northwind.console.sqlclient\\northwind.console.sqlclient.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A90AAB3D-61C3-473C-A829-CB67E25615B7}|Northwind.Console.SqlClient\\Northwind.Console.SqlClient.csproj|solutionrelative:northwind.console.sqlclient\\northwind.console.sqlclient.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A90AAB3D-61C3-473C-A829-CB67E25615B7}|Northwind.Console.SqlClient\\Northwind.Console.SqlClient.csproj|c:\\users\\nramsey-az\\desktop\\appsandservicesdotnet8\\chapter02\\chapter02\\northwind.console.sqlclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A90AAB3D-61C3-473C-A829-CB67E25615B7}|Northwind.Console.SqlClient\\Northwind.Console.SqlClient.csproj|solutionrelative:northwind.console.sqlclient\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.Helpers.cs",
+              "DocumentMoniker": "C:\\Users\\nramsey-az\\Desktop\\AppsAndServicesDotNet8\\Chapter02\\Chapter02\\Northwind.Console.SqlClient\\Program.Helpers.cs",
+              "RelativeDocumentMoniker": "Northwind.Console.SqlClient\\Program.Helpers.cs",
+              "ToolTip": "C:\\Users\\nramsey-az\\Desktop\\AppsAndServicesDotNet8\\Chapter02\\Chapter02\\Northwind.Console.SqlClient\\Program.Helpers.cs",
+              "RelativeToolTip": "Northwind.Console.SqlClient\\Program.Helpers.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-24T14:23:37.089Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Northwind.Console.SqlClient",
+              "DocumentMoniker": "C:\\Users\\nramsey-az\\Desktop\\AppsAndServicesDotNet8\\Chapter02\\Chapter02\\Northwind.Console.SqlClient\\Northwind.Console.SqlClient.csproj",
+              "RelativeDocumentMoniker": "Northwind.Console.SqlClient\\Northwind.Console.SqlClient.csproj",
+              "ToolTip": "C:\\Users\\nramsey-az\\Desktop\\AppsAndServicesDotNet8\\Chapter02\\Chapter02\\Northwind.Console.SqlClient\\Northwind.Console.SqlClient.csproj",
+              "RelativeToolTip": "Northwind.Console.SqlClient\\Northwind.Console.SqlClient.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-07-24T14:19:10.479Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\nramsey-az\\Desktop\\AppsAndServicesDotNet8\\Chapter02\\Chapter02\\Northwind.Console.SqlClient\\Program.cs",
+              "RelativeDocumentMoniker": "Northwind.Console.SqlClient\\Program.cs",
+              "ToolTip": "C:\\Users\\nramsey-az\\Desktop\\AppsAndServicesDotNet8\\Chapter02\\Chapter02\\Northwind.Console.SqlClient\\Program.cs",
+              "RelativeToolTip": "Northwind.Console.SqlClient\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-24T14:18:43.246Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
