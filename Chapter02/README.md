@@ -57,5 +57,14 @@
 | SqlParameter | ParameterName, Value, DbType, SqlValue, SqlDbType, Direction, IsNullable | | Configure a parameter for a command. |
 | SqlDataReader | FieldCount, HasRows, IsClosed, RecordsAffected | Read, Close, GetOrdinal, GetInt32, GetString, GetDecimal, GetFieldValue<<T>T> | Process the result set from executing a query. |
 
+## Connection Statistics That Can Be Tracked
+| Key | Description |
+|-----|-------------|
+| BuffersReceived, BuffersSent, BytesReceived, BytesSent | Data is transmitted as bytes stored in buffers. |
+| CursorOpens | Cursors are an expensive operation because they require state on the server, and should be avoided when possible. |
+| Prepares, PreparedExecs, UnpreparedExecs | Number of prepares (compilations), executions of prepared commands, and executions of unprepared commands. |
+| SelectCount, SelectRows | Number of *SELECT* statements and rows returned by *SELECT* statements. |
+| ServerRoundTrips, SumResultSets, Transactions | Number of server round trips, result sets, and transactions. |
+| ConnectionTime, ExecutionTime, NetworkServerTime | Time in milliseconds spent connected, executing commands, or due to the network. |
 
 ## Practice Questions
