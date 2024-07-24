@@ -5,7 +5,6 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	  <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -13,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Using Include="System.Console" Static="true"/>
+		<Using Include="System.Console" Static="true" />
 	</ItemGroup>
 
 </Project>
