@@ -1,5 +1,9 @@
 ﻿using Microsoft.Data.SqlClient; // To use SqlConnection and so on
 using System.Data; // To use CommandType
+using System.Text.Json; // To use Utf8JsonWriter, JsonSerializer
+
+using static System.Environment;
+using static System.IO.Path;
 
 ConfigureConsole();
 
@@ -124,11 +128,57 @@ if(!decimal.TryParse(priceText, out decimal price))
 
 SqlCommand cmd = connection.CreateCommand();
 
-cmd.CommandType = CommandType.Text;
-cmd.CommandText = "SELECT ProductId, ProductName, UnitPrice FROM Products"
-    + " WHERE UnitPrice >= @minimumPrice";
+WriteLine("Execute command using:");
+WriteLine(" 1 - Text");
+WriteLine(" 2 - Stored Procedures");
+WriteLine();
+Write("Press a key: ");
 
-cmd.Parameters.AddWithValue("minimumPrice", price);
+key = ReadKey().Key;
+WriteLine(); WriteLine();
+
+SqlParameter p1, p2 = new(), p3 = new();
+
+if (key is ConsoleKey.D1 or ConsoleKey.NumPad1)
+{
+    cmd.CommandType = CommandType.Text;
+    cmd.CommandText = "SELECT ProductId, ProductName, UnitPrice FROM Products"
+        + "WHERE UnitPrice >= @minimumPrice";
+}
+else if (key is ConsoleKey.D2 or ConsoleKey.NumPad2)
+{
+    cmd.CommandType = CommandType.StoredProcedure;
+    cmd.CommandText = "GetExpensiveProducts";
+
+    p1 = new()
+    {
+        ParameterName = "price",
+        SqlDbType = SqlDbType.Money,
+        SqlValue = price
+    };
+
+    p2 = new()
+    {
+        Direction = ParameterDirection.Output,
+        ParameterName = "count",
+        SqlDbType = SqlDbType.Int,
+    };
+
+    p3 = new()
+    {
+        Direction = ParameterDirection.ReturnValue,
+        ParameterName = "rv",
+        SqlDbType = SqlDbType.Int,
+    };
+
+    cmd.Parameters.AddRange(new[] { p1, p2, p3 });
+}
+
+//cmd.CommandType = CommandType.Text;
+//cmd.CommandText = "SELECT ProductId, ProductName, UnitPrice FROM Products"
+//    + " WHERE UnitPrice >= @minimumPrice";
+
+//cmd.Parameters.AddWithValue("minimumPrice", price);
 
 SqlDataReader r = await cmd.ExecuteReaderAsync();
 
@@ -138,18 +188,51 @@ WriteLine("| {0,5} | {1,-35} | {2,10} |",
     arg0: "Id", arg1: "Name", arg2: "Price");
 WriteLine(horizontalLine);
 
-while (await r.ReadAsync())
+// Define a file path to write to
+string jsonPath = Combine(CurrentDirectory, "products.json");
+
+await using (FileStream jsonStream = File.Create(jsonPath))
 {
-    WriteLine("| {0,5} | {1,-35} | {2,10:C} |",
-        await r.GetFieldValueAsync<int>("ProductId"),
-        await r.GetFieldValueAsync<string>("ProductName"),
-        await r.GetFieldValueAsync<decimal>("UnitPrice"));
+    Utf8JsonWriter jsonWriter = new(jsonStream);
+    jsonWriter.WriteStartArray();
+
+
+    while (await r.ReadAsync())
+    {
+        WriteLine("| {0,5} | {1,-35} | {2,10:C} |",
+            await r.GetFieldValueAsync<int>("ProductId"),
+            await r.GetFieldValueAsync<string>("ProductName"),
+            await r.GetFieldValueAsync<decimal>("UnitPrice"));
+
+        jsonWriter.WriteStartObject();
+
+        jsonWriter.WriteNumber("productId",
+            await r.GetFieldValueAsync<int>("ProductId"));
+        jsonWriter.WriteString("productName",
+            await r.GetFieldValueAsync<string>("ProductName"));
+        jsonWriter.WriteNumber("unitPrice",
+            await r.GetFieldValueAsync<decimal>("UnitPrice"));
+
+        jsonWriter.WriteEndObject();
+    }
+
+    jsonWriter.WriteEndArray();
+    jsonWriter.Flush();
+    jsonStream.Close();
 }
+
+WriteLineInColor($"Written to {jsonPath}", ConsoleColor.DarkGreen);
 
 WriteLine(horizontalLine);
 
 await r.CloseAsync();
 
-OutputStatistics(connection);
+//OutputStatistics(connection);
+
+if (key is ConsoleKey.D2 or ConsoleKey.NumPad2)
+{
+    WriteLine($"Output count: {p2.Value}");
+    WriteLine($"Return value: {p3.Value}");
+}
 
 await connection.CloseAsync();
