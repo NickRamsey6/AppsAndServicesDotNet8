@@ -1,9 +1,10 @@
 ﻿using Microsoft.Data.SqlClient; // To use SqlConnection and so on
 using System.Data; // To use CommandType
 using System.Text.Json; // To use Utf8JsonWriter, JsonSerializer
-
+using Northwind.Models; // To use Product
 using static System.Environment;
 using static System.IO.Path;
+using Dapper;
 
 ConfigureConsole();
 
@@ -191,6 +192,8 @@ WriteLine(horizontalLine);
 // Define a file path to write to
 string jsonPath = Combine(CurrentDirectory, "products.json");
 
+List<Product> products = new(capacity: 77);
+
 await using (FileStream jsonStream = File.Create(jsonPath))
 {
     Utf8JsonWriter jsonWriter = new(jsonStream);
@@ -199,6 +202,14 @@ await using (FileStream jsonStream = File.Create(jsonPath))
 
     while (await r.ReadAsync())
     {
+        Product product = new()
+        {
+            ProductId = await r.GetFieldValueAsync<int>("ProductId"),
+            ProductName = await r.GetFieldValueAsync<string>("ProductName"),
+            UnitPrice = await r.GetFieldValueAsync<decimal>("UnitPrice")
+        };
+        products.Add(product);
+
         WriteLine("| {0,5} | {1,-35} | {2,10:C} |",
             await r.GetFieldValueAsync<int>("ProductId"),
             await r.GetFieldValueAsync<string>("ProductName"),
@@ -225,6 +236,9 @@ WriteLineInColor($"Written to {jsonPath}", ConsoleColor.DarkGreen);
 
 WriteLine(horizontalLine);
 
+WriteLineInColor(JsonSerializer.Serialize(products),
+    ConsoleColor.Magenta);
+
 await r.CloseAsync();
 
 //OutputStatistics(connection);
@@ -236,3 +250,39 @@ if (key is ConsoleKey.D2 or ConsoleKey.NumPad2)
 }
 
 await connection.CloseAsync();
+
+#region Using Dapper
+
+WriteLineInColor("Using Dapper", ConsoleColor.DarkGreen);
+
+connection.ResetStatistics(); // So we can compare using Dapper
+
+IEnumerable<Supplier> suppliers = connection.Query<Supplier>(
+    sql: "SELECT * FROM Suppliers WHERE Country=@Country",
+    param: new { Country = "Germany" });
+
+foreach (Supplier s in suppliers)
+{
+    WriteLine("{0}: {1}, {2}, {3}",
+        s.SupplierId, s.CompanyName, s.City, s.Country);
+}
+
+WriteLineInColor(JsonSerializer.Serialize(suppliers),
+    ConsoleColor.Green);
+
+OutputStatistics(connection);
+
+IEnumerable<Product> productsFromDapper =
+    connection.Query<Product>(sql: "GetExpensiveProducts",
+    param: new { price = 100M, count = 0 },
+    commandType: CommandType.StoredProcedure);
+
+foreach (Product p in productsFromDapper)
+{
+    WriteLine("{0}: {1}, {2}",
+        p.ProductId, p.ProductName, p.UnitPrice);
+}
+
+WriteLineInColor(JsonSerializer.Serialize(productsFromDapper), ConsoleColor.Green);
+
+#endregion

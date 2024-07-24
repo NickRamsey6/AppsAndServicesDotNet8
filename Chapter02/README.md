@@ -67,4 +67,14 @@
 | ServerRoundTrips, SumResultSets, Transactions | Number of server round trips, result sets, and transactions. |
 | ConnectionTime, ExecutionTime, NetworkServerTime | Time in milliseconds spent connected, executing commands, or due to the network. |
 
+## Dapper Query<T<T>> Extension Method Parameters
+| Parameter | Description |
+|-----------|-------------|
+| string sql | This is the only mandatory parameter. It is either the text of a SQL command or the name of a stored procedure. |
+| object param = null | A complex object for passing parameters used in the query. This can be an anonymous type. |
+| IDbTransaction transaction = null | To manage distributed transactions. |
+| bool buffered = true | By default, it will buffer the entire reader on return. With large datasets, you can minimize memory and only load objects as needed by setting buffered to false,=. |
+| int? commandTimeout = null | To change the default command timeout. |
+| commandType? commandType = null) | To switch to a stored procedure instead of the default of text. |
+
 ## Practice Questions

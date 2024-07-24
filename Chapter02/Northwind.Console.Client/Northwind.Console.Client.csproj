@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
+		<PackageReference Include="Dapper" Version="2.1.21" />
 	</ItemGroup>
 
 	<ItemGroup>
