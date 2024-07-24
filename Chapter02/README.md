@@ -1,6 +1,9 @@
 # Chapter 2 Managing Relational Data Using SQL Server
 
 ## Key Concepts
+* Connect to an existing SQL Server database
+* Execute a simple query and process the results using fast and low-level ADO.NET
+* Execute a simple query and process the results using Dapper
 
 ## SQL Server Data Types
 | Category | Examples |
@@ -78,3 +81,15 @@
 | commandType? commandType = null) | To switch to a stored procedure instead of the default of text. |
 
 ## Practice Questions
+1. Which NuGet package should you reference in a .NET project to get the best performance when working with data in SQL Server?  
+**Answer: Microsoft.Data.SqlClient**
+2. What is the safest way to define a database connection string?  
+**Answer: Use SqlConnectionStringBuilder, set its properties like DataSource, InitialCatalog, UserID, and Password, and then read its ConnectionString property.**
+3. What must T-SQL parameters and variables be prefixed with?  
+**Answer: @**
+4. What must you do before reading an output parameter?  
+**Answer: Close the data reader**
+5. What type does Dapper add its extension methods to?  
+**Answer: Any type that implements IDbConnection**
+6. What are the two most commonly used extension methods provided by Dapper?  
+**Answer: Query<T<T>> and Execute** 
