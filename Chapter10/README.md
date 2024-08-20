@@ -1,6 +1,11 @@
 # Chapter 10 Building Serverless Nanoservices Using Azure Functions
 
 ## Key Concepts
+* Azure Functions
+* Building Serverless Services Using Azure Functions
+* Responding to HTTP, Timer and Queue Triggers
+* Binding to Queue and Blob Storage
+* Deploying Azure Functions to the cloud
 
 ## Common Triggers for Azure Functions
 * **HTTP**: This trigger responds to an incoming HTTP request, typically GET or POST.
@@ -41,4 +46,21 @@
 | 0 30 9 * Jan Mon | 9:30 AM every Monday in January. |
 
 ## Practice Questions
-
+1. What is the difference between the in-process and isolated worker models for Azure Functions?  
+**Answer: Isolated functions run in their own process and give you full control over the Main entry point, and additional features like invocation middleware. In-process hosting model requires your Azure function be loaded alongside other code to target a predefined version of an LTS release. Isolated can use any version of .NET**
+2. What attribute do you use to cause a function to trigger when a message arrives in a queue?  
+**Answer: [QueueTrigger]**
+```
+public static async Task Run(
+    [QueueTrigger("checksQueue")] QueueMessage message, ILogger log)
+```
+3. What attribute do you use to make a queue available to send messages to?  
+**Answer:[Queue]**
+```
+public static async Task<IActionResult> Run(
+    [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req, [Queue("checksQueue")] ICollector<string> collector, ILogger log)
+```
+4. What schedule does the following NCRONTAB expression define? 0 0 */6 * 66  
+**Answer: Staurdays (the last 6 digit) during June (the second to last 6 digit) on any day of the month at zero minutes and seconds (first and second 0's) of every 6 hours (*/6)**
+5. How can you configure a dependency service for use in a function?  
+**Answer: Create a class that inherits from FunctionStartup class and override its Configure method. Add the [FunctionsStartup] assembly attribute to specify the class name registered for startup. Add services to the IFunctionsHostBuilder instance passed to the method**
