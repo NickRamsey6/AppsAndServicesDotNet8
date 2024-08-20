@@ -17,8 +17,15 @@
     <PackageReference Include="Microsoft.Azure.Functions.Worker.ApplicationInsights" Version="1.2.0" />
 	  <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
 	  <PackageReference Version="4.2.0" Include="Microsoft.Azure.Functions.Worker.Extensions.Timer" />
+	  <PackageReference Version="5.2.0" Include="Microsoft.Azure.Functions.Worker.Extensions.Storage.Queues" />
+	  <PackageReference Version="6.2.0" Include="Microsoft.Azure.Functions.Worker.Extensions.Storage.Blobs" />
+	  <PackageReference Include="SixLabors.ImageSharp" Version="3.0.2" />
+	  <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="fonts\Caveat\static\Caveat-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -29,5 +36,8 @@
   </ItemGroup>
   <ItemGroup>
     <Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="fonts\" />
   </ItemGroup>
 </Project>
