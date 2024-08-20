@@ -7,4 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<Using Include="System.Console" Static="true" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="NCrontab.Signed" Version="3.3.3" />
+	</ItemGroup>
+
 </Project>
